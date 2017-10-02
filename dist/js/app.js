@@ -1,5 +1,17 @@
 'use strict';
 
+// function removePrependingThe() {
+//     let alteredTitles = [];
+
+//     for (let title of arguments) {
+//         if (title.startsWith('THE ')) {
+//             alteredTitles.unshift(title.replace('THE ', ''));
+//         }
+//     }
+
+//     return alteredTitles;
+// }
+
 (function() {
     const displayOptionsDropdown = document.querySelector('#sort-options-selector');
     const resultsAmountDropdown = document.querySelector('#results-amount-selector');
@@ -57,6 +69,7 @@
 
     function changeSortPreference(e) {
         let preference = e.target.value;
+        let numberOfResults = resultsAmountDropdown.value;
         let sortedData = [...responseData];
 
         apiDataContainer.innerHTML = '';
@@ -86,6 +99,8 @@
                 sortedData.sort((a, b) => {
                     let [titleA, titleB] = [a.title.toUpperCase(), b.title.toUpperCase()];
 
+                    // [titleA, titleB] = removePrependingThe(titleA, titleB);
+
                     if (titleA < titleB) {
                         return 1;
                     }
@@ -101,6 +116,7 @@
                 sortedData.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
                 break;
             case 'genre':
+                numberOfResults = sortedData.length;
                 break;
             default:
                 break;
