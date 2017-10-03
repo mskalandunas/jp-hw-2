@@ -5,6 +5,7 @@
     const resultsAmountDropdown = document.querySelector('#results-amount-selector');
     const apiDataContainer = document.querySelector('#api-data-container');
     const responseData = [];
+    const genres = [];
     const options = {
         method: 'GET',
         headers: {
@@ -18,8 +19,15 @@
         displayOptionsDropdown.addEventListener('change', changeSortPreference, true);
         responseData.forEach(entry => {
             entry.release_date_in_ms = new Date(entry.release_date).getTime();
-            buildDataCard(entry, apiDataContainer);
+            entry.genre = entry.genre.split(', ');
+            entry.genre.forEach(genre => {
+                !genres.includes(genre) && genres.push(genre);
+            });
+            entry.genre.sort();
         });
+
+        changeSortPreference();
+        genres.sort();
     }).catch(err => {
         console.log(err);
     });
@@ -54,9 +62,23 @@
         parent.appendChild(card);
     }
 
+    function sortGenre(genres, data) {
+        const array = [];
+
+        genres.forEach(genre => {
+            data.forEach(index => {
+                if (index.genre.includes(genre)) {
+                    array.push(index);
+                    data.pop(index);
+                }
+            });
+        });
+
+        return array;
+    }
+
     function changeSortPreference(e) {
-        let preference = e.target.value;
-        let numberOfResults = resultsAmountDropdown.value;
+        const preference = (e && e.target.value) || 'release-data-latest';
         let sortedData = [...responseData];
 
         apiDataContainer.innerHTML = '';
@@ -102,7 +124,7 @@
                 sortedData.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
                 break;
             case 'genre':
-                numberOfResults = sortedData.length;
+                sortedData = sortGenre(genres, sortedData);
                 break;
             default:
                 break;
