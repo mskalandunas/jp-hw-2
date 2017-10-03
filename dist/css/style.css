@@ -152,6 +152,7 @@ svg {
 .rendered-api-entry img {
     margin: 0 0 10px 0;
     width: inherit;
+    border-radius: 3px;
 }
 
 .rendered-api-entry p {
