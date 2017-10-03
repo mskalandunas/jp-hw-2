@@ -19,15 +19,9 @@
         displayOptionsDropdown.addEventListener('change', changeSortPreference, true);
         responseData.forEach(entry => {
             entry.release_date_in_ms = new Date(entry.release_date).getTime();
-            entry.genre = entry.genre.split(', ');
-            entry.genre.forEach(genre => {
-                !genres.includes(genre) && genres.push(genre);
-            });
-            entry.genre.sort();
         });
 
         changeSortPreference();
-        genres.sort();
     }).catch(err => {
         console.log(err);
     });
@@ -60,21 +54,6 @@
         `
 
         parent.appendChild(card);
-    }
-
-    function sortGenre(genres, data) {
-        const array = [];
-
-        genres.forEach(genre => {
-            data.forEach(index => {
-                if (index.genre.includes(genre)) {
-                    array.push(index);
-                    data.pop(index);
-                }
-            });
-        });
-
-        return array;
     }
 
     function changeSortPreference(e) {
@@ -124,7 +103,19 @@
                 sortedData.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
                 break;
             case 'genre':
-                sortedData = sortGenre(genres, sortedData);
+                sortedData.sort((a, b) => {
+                    let [genreA, genreB] = [a.genre.toUpperCase(), b.genre.toUpperCase()];
+
+                    if (genreA < genreB) {
+                        return -1;
+                    }
+
+                    if (genreA > genreB) {
+                        return 1;
+                    }
+
+                    return 0;
+                });
                 break;
             default:
                 break;
