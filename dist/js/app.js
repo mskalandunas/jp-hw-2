@@ -50,7 +50,7 @@
             <p>Genre:
                 <span class="rendered-api-genre">${entry.genre}</span>
             </p>
-            <p class="rendered-api-description"><br>${entry.description.replace(/\n/g, '\n\n')}</p>
+            <p class="rendered-api-description"><br>${entry.description}</p>
         `
 
         parent.appendChild(card);
