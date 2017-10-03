@@ -56,6 +56,22 @@
         parent.appendChild(card);
     }
 
+    function sortStrings(array, prop, e, f) {
+        array.sort((a, b) => {
+            let [c, d] = [a[prop].toUpperCase(), b[prop].toUpperCase()];
+
+            if (c < d) {
+                return e;
+            }
+
+            if (c > d) {
+                return f;
+            }
+
+            return 0;
+        });
+    }
+
     function changeSortPreference(e) {
         const preference = (e && e.target.value) || 'release-data-latest';
         let sortedData = [...responseData];
@@ -70,52 +86,16 @@
                 sortedData.sort((a, b) => a.release_date_in_ms - b.release_date_in_ms);
                 break;
             case 'alphabetical':
-                sortedData.sort((a, b) => {
-                    let [titleA, titleB] = [a.title.toUpperCase(), b.title.toUpperCase()];
-
-                    if (titleA < titleB) {
-                        return -1;
-                    }
-
-                    if (titleA > titleB) {
-                        return 1;
-                    }
-
-                    return 0;
-                });
+                sortStrings(sortedData, 'title', -1, 1);
                 break;
             case 'reverse-alphabetical':
-                sortedData.sort((a, b) => {
-                    let [titleA, titleB] = [a.title.toUpperCase(), b.title.toUpperCase()];
-
-                    if (titleA < titleB) {
-                        return 1;
-                    }
-
-                    if (titleA > titleB) {
-                        return -1;
-                    }
-
-                    return 0;
-                });
+                sortStrings(sortedData, 'title', 1, -1);
                 break;
             case 'rating':
                 sortedData.sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
                 break;
             case 'genre':
-                sortedData.sort((a, b) => {
-                    let [genreA, genreB] = [a.genre.toUpperCase(), b.genre.toUpperCase()];
-
-                    if (genreA < genreB) {
-                        return -1;
-                    }
-
-                    if (genreA > genreB) {
-                        return 1;
-                    }
-
-                    return 0;
-                });
+                sortStrings(sortedData, 'genre', -1, 1);
                 break;
             default:
                 break;
