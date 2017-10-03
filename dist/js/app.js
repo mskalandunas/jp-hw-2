@@ -1,17 +1,5 @@
 'use strict';
 
-// function removePrependingThe() {
-//     let alteredTitles = [];
-
-//     for (let title of arguments) {
-//         if (title.startsWith('THE ')) {
-//             alteredTitles.unshift(title.replace('THE ', ''));
-//         }
-//     }
-
-//     return alteredTitles;
-// }
-
 (function() {
     const displayOptionsDropdown = document.querySelector('#sort-options-selector');
     const resultsAmountDropdown = document.querySelector('#results-amount-selector');
@@ -28,9 +16,8 @@
     fetch('http://mosaic-mock-api.herokuapp.com/api/games', options).then(res => res.json()).then(data => {
         responseData.push(...data.games);
         displayOptionsDropdown.addEventListener('change', changeSortPreference, true);
-
-        // Use more DRY function for this
         responseData.forEach(entry => {
+            entry.release_date_in_ms = new Date(entry.release_date).getTime();
             buildDataCard(entry, apiDataContainer);
         });
     }).catch(err => {
@@ -74,11 +61,12 @@
 
         apiDataContainer.innerHTML = '';
 
-        // Break these up into more DRY functions
         switch(preference) {
             case 'release-data-latest':
+                sortedData.sort((a, b) => b.release_date_in_ms - a.release_date_in_ms);
                 break;
             case 'release-data-earliest':
+                sortedData.sort((a, b) => a.release_date_in_ms - b.release_date_in_ms);
                 break;
             case 'alphabetical':
                 sortedData.sort((a, b) => {
@@ -98,8 +86,6 @@
             case 'reverse-alphabetical':
                 sortedData.sort((a, b) => {
                     let [titleA, titleB] = [a.title.toUpperCase(), b.title.toUpperCase()];
-
-                    // [titleA, titleB] = removePrependingThe(titleA, titleB);
 
                     if (titleA < titleB) {
                         return 1;
