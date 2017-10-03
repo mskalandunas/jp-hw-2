@@ -5,7 +5,6 @@
     const resultsAmountDropdown = document.querySelector('#results-amount-selector');
     const apiDataContainer = document.querySelector('#api-data-container');
     const responseData = [];
-    const genres = [];
     const options = {
         method: 'GET',
         headers: {
@@ -20,7 +19,6 @@
         responseData.forEach(entry => {
             entry.release_date_in_ms = new Date(entry.release_date).getTime();
         });
-
         changeSortPreference();
     }).catch(err => {
         console.log(err);
