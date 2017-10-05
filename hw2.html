@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW 2</title>
+    <style type="text/css">
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
+			xhr.send();
+			console.log(xhr.status);
+			console.log(xhr.statusText);
+	</script>
+</body>
