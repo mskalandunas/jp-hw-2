@@ -12,5 +12,8 @@
 			xhr.send();
 			console.log(xhr.status);
 			console.log(xhr.statusText);
+
+			var jsonData = JSON.parse(xhr.responseText);
+			console.log(jsonData);
 	</script>
 </body>
