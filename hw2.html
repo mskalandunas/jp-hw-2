@@ -6,14 +6,33 @@
 	</style>
 </head>
 <body>
-	<script type="text/javascript">
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
-			xhr.send();
-			console.log(xhr.status);
-			console.log(xhr.statusText);
+	<div id="game0"></div>
+	<div id="game1"></div>
+	<div id="game2"></div>
+	<div id="game3"></div>
+	<div id="game4"></div>
+	<div id="game5"></div>
+	<div id="game6"></div>
+	<div id="game7"></div>
+	<div id="game8"></div>
+	<div id="game9"></div>
 
-			var jsonData = JSON.parse(xhr.responseText);
-			console.log(jsonData);
+	<script type="text/javascript">
+	  var xhr = new XMLHttpRequest();
+	 
+	  let i;
+	  xhr.onload = function() {
+	    var jsonData = JSON.parse(xhr.responseText);
+	    console.log(jsonData);
+	    for (i = 0; i < 10; i++) {
+	      document.getElementById(`game${i}`).innerHTML = jsonData[i];
+	    }
+	  }
+
+	  xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
+	  xhr.send();
+	  console.log(xhr.status);
+	  console.log(xhr.statusText);
+
 	</script>
 </body>
