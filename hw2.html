@@ -6,52 +6,16 @@
 	</style>
 </head>
 <body>
-	<!-- description, developer, genre, publisher, rating, release_date, reviews, screenshot, title -->
-	<div id="game0">
-		<div id="game0_title"></div>
-		<div id="game0_screenshot"></div>
-		<div id="game0_developer"></div>
-		<div id="game0_description"></div>
-		<div id="game0_genre"></div>
-		<div id="game0_publisher"></div>
-		<div id="game0_rating"></div>
-		<div id="game0_release_date"></div>
-		<div id="game0_reviews"></div>
-	</div>
-	<div id="game1"></div>
-	<div id="game2"></div>
-	<div id="game3"></div>
-	<div id="game4"></div>
-	<div id="game5"></div>
-	<div id="game6"></div>
-	<div id="game7"></div>
-	<div id="game8"></div>
-	<div id="game9"></div>
-
+	<div id="app-root"></div>
 	<script type="text/javascript">
-	  var xhr = new XMLHttpRequest();
-	 
-	  let i;
+	  const xhr = new XMLHttpRequest();
+	  const data = [];
+
 	  xhr.onload = function() {
-	    var jsonData = JSON.parse(xhr.responseText);
-	    console.log(jsonData);
-	    for (i = 0; i < 10; i++) {
-	      document.getElementById(`game${i}_title`).innerHTML = jsonData[i].title;
-	      document.getElementById(`game${i}_screenshot`).innerHTML = jsonData[i].screenshot;
-	      document.getElementById(`game${i}_developer`).innerHTML = jsonData[i].developer;
-	      document.getElementById(`game${i}_description`).innerHTML = jsonData[i].description;
-	      document.getElementById(`game${i}_genre`).innerHTML = jsonData[i].genre;
-	      document.getElementById(`game${i}_publisher`).innerHTML = jsonData[i].publisher;
-	      document.getElementById(`game${i}_rating`).innerHTML = jsonData[i].rating;
-	      document.getElementById(`game${i}_release_date`).innerHTML = jsonData[i].release_date;
-	      document.getElementById(`game${i}_reviews`).innerHTML = jsonData[i].reviews;
-	    }
+	    data.push(...JSON.parse(xhr.responseText).games);
 	  }
 
 	  xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
 	  xhr.send();
-	  console.log(xhr.status);
-	  console.log(xhr.statusText);
-
 	</script>
 </body>
