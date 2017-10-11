@@ -8,14 +8,24 @@
 <body>
 	<div id="app-root"></div>
 	<script type="text/javascript">
-	  const xhr = new XMLHttpRequest();
-	  const data = [];
+	    const appRoot = document.querySelector('#app-root');
+	    const xhr = new XMLHttpRequest();
+	    const data = [];
 
-	  xhr.onload = function() {
-	    data.push(...JSON.parse(xhr.responseText).games);
-	  }
+	    xhr.onload = () => {
+	        data.push(...JSON.parse(xhr.responseText).games);
+	    }
 
-	  xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
-	  xhr.send();
+	    // take in a game somewhere in a loop
+	    function createNewELement(game) {
+	    	// do something similar to this, this will break probably
+	    	return '<div>' + game + '</div>';
+	    }
+
+	    // do something similar to this
+	    appRoot.innerHTML = createNewELement(game);
+
+	    xhr.open("GET", "https://mosaic-mock-api.herokuapp.com/api/games", false);
+	    xhr.send();
 	</script>
 </body>
