@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mock API Data Rendering</title>
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono|Merriweather+Sans|Noto+Serif' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <main class="container">
+    <h1>MOCKAPI</h1>
+    <p>Here are several ways to render the data coming from the
+        <a class="link" href="http://mosaic-mock-api.herokuapp.com" target="_blank" rel="noopener">mock indie games API</a>.
+    </p>
+    <select id="sort-options-selector">
+        <option selected value="release-data-latest">Release Date(latest)</option>
+        <option value="release-data-earliest">Release Date(earliest)</option>
+        <option value="alphabetical">Alphabetical</option>
+        <option value="reverse-alphabetical">Reverse Alphabetical</option>
+        <option value="rating">By Rating</option>
+        <option value="genre">By Genre</option>
+    </select>
+    <select id="results-amount-selector">
+        <option selected value="30">Number of Results</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="30">30</option>
+    </select>
+
+    <!-- Root -->
+    <section id="api-data-container"></section>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        <span>
+          <a href="https://github.com/mskalandunas" target="_blank" rel="noopener" title="GitHub">
+            <i class="fa fa-github"></i>
+          </a>
+        </span>
+        <span>
+          <a class="mosaic-icon" href="http://mosaicmusic.io/" target="_blank" rel="noopener" title="mosaicmusic.io, my music website.">
+            <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 319.13 319.13">
+              <title>mosaic</title>
+              <g fill="#5a5a5a">
+                <rect x="255.31" width="63.83" height="63.83"/>
+                <polygon points="0 127.65 0 191.48 0 255.31 0 319.13 63.83 319.13 127.65 319.13 191.48 319.13 191.48 255.31 127.65 255.31 63.83 255.31 63.83 191.48 63.83 127.65 0 127.65"/>
+                <polygon points="0 0 0 63.83 63.83 63.83 127.65 63.83 127.65 127.65 127.65 191.48 191.48 191.48 255.31 191.48 255.31 255.31 255.31 319.13 319.13 319.13 319.13 127.65 255.31 127.65 191.48 127.65 191.48 63.83 191.48 0 0 0"/>
+              </g>
+            </svg>
+          </a>
+        </span>
+        <span>
+          <a href="https://www.linkedin.com/in/mskalandunas" target="_blank" rel="noopener" title="Linkedin">
+            <i class="fa fa-linkedin"></i>
+          </a>
+        </span>
+      </p>
+    </footer>
+    </main>
+    <script type="text/javascript" src="js/app.js"></script>
+</body>
+</html>
